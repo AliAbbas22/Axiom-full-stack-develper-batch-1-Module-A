@@ -1,9 +1,7 @@
-
-//Retreving HTML from DOM 
 const form      = document.getElementById('form');
 const username  = document.getElementById('username');
 const email     = document.getElementById('email');
-const password  = document.getElementById('passwrord');
+const password  = document.getElementById('passwrord'); 
 const password2 = document.getElementById('passwrord2');
  
 //function to update class and massage for error
@@ -28,37 +26,38 @@ function ShowSuccess(input){
 
 }
 
-//EventListner
-//create event listner for submit button 
+        // function to check email is valid
 
-form.addEventListener('submit', function(e){
+        function isValidEmail(email) {
+            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+   //function check required
+   function checkRequired(inputArray){
+       inputArray.array.forEach(function(input) {
+          if(input.value ===''){
+              console.log( input.id);
+              showError(input,`${getFieldId(input)} is required`)
+          } else {
+              ShowSuccess(input);
+          
+       });
+   }  
+       
+       //function to get id of the input field with proper
+
+       function getFieldId(input){
+           return input.id.charAt(0).toUpperCase()+ input.id.slice(1);
+       }
+
+
+
+
+//create event listner for submit button 
+form.addEventListener('submit', function(e) {
     
     //stop page from reloading on submit
     e.preventDefault();
-    //check if username is empty 
-    if( username.value === ''){
-        showError(username,'Username is required');
-    } else{
-        ShowSuccess(username);
-        }
+    checkRequired([username,email,password,password2]);
 
-        //check if email input is empty 
-    if( email.value === ''){
-        showError(email,'email is required');
-    } else{
-        ShowSuccess(email);
-        }
-         //check if password input is empty 
-    if( password.value === ''){
-        showError(password,'password is required');
-    } else{
-        ShowSuccess(password);
-        }
-
-         //check if confrm password input is empty 
-    if( password2.value === ''){
-        showError(password2,'confrm password is required');
-    } else{
-        ShowSuccess(password2);
-        }
-});
+})

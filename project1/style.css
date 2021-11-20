@@ -80,3 +80,10 @@
       margin-top: 20px;
       width: 100%;
   }
+  button.home{
+      width: 100%;
+      color:0.3;
+      height: 30px;
+      border-radius: 5px ;
+      border-color:  #ecf0f1;
+  }
